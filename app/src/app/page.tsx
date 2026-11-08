@@ -26,6 +26,7 @@ import { getConnection } from "@/lib/connection";
 import { sendIx } from "@/lib/connection";
 import {
   DEMO_SENDER,
+  DEMO_KEYS_READY,
   recipientById,
 } from "@/lib/demo-keypairs";
 import {
@@ -67,7 +68,7 @@ export default function Home() {
   const [senderBal, setSenderBal] = useState<number | null>(null);
   const [recipientBal, setRecipientBal] = useState<number | null>(null);
 
-  const keypairMissing = DEMO_SENDER.pubkey.length === 0;
+  const keypairMissing = !DEMO_KEYS_READY;
 
   // 1Hz ticker for the countdown + balance refresh.
   useEffect(() => {

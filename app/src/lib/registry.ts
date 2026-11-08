@@ -38,20 +38,23 @@ const DEMO_NUMBERS: Array<{
   { display: "+254712000003", digits: "712000003", recipientId: "r3", name: "Caro" },
 ];
 
-export const REGISTRY: RegistryEntry[] = DEMO_NUMBERS.map((n) => {
+export const REGISTRY: RegistryEntry[] = DEMO_NUMBERS.flatMap((n) => {
   const party = DEMO_RECIPIENTS.find((r) => r.id === n.recipientId);
   if (!party) {
-    throw new Error(
-      `registry: demo recipient "${n.recipientId}" missing from demo-keypairs.json — run \`npm run fund\``,
-    );
+    // Keys not loaded (no env var / no local file). Return no entry rather than
+    // throwing, so the production build and first render don't crash. The UI
+    // uses DEMO_KEYS_READY to show a "run npm run fund" hint in this state.
+    return [];
   }
-  return {
-    display: n.display,
-    digits: n.digits,
-    recipientId: n.recipientId,
-    pubkey: party.pubkey,
-    name: n.name,
-  };
+  return [
+    {
+      display: n.display,
+      digits: n.digits,
+      recipientId: n.recipientId,
+      pubkey: party.pubkey,
+      name: n.name,
+    },
+  ];
 });
 
 /**

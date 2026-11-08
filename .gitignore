@@ -7,6 +7,8 @@ id.json
 !.env.example
 # the app's demo wallet secret keys — local only, template committed instead
 app/src/lib/demo-keypairs.json
+# EXCEPTION: the all-throwaway placeholder IS committed (build depends on it; no real secret)
+!app/src/lib/demo-keypairs.default.json
 
 # ---- Rust / Solana build artifacts ----
 target/
