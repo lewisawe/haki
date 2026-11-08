@@ -1,0 +1,43 @@
+# ---- Secrets / keypairs (NEVER commit) ----
+*keypair*.json
+id.json
+*.pem
+.env
+.env.*
+!.env.example
+# the app's demo wallet secret keys — local only, template committed instead
+app/src/lib/demo-keypairs.json
+
+# ---- Rust / Solana build artifacts ----
+target/
+**/target/
+.anchor/
+test-ledger/
+
+# ---- Node / Next.js ----
+node_modules/
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ---- Agent/task scratch (keep specs, drop transient task dirs) ----
+.agents/
+
+# ---- Internal planning / working docs (NOT deliverables — keep out of public repo) ----
+.kiro/
+idea-scorecard.md
+hackathon.txt
+submission/
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

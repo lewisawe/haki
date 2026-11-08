@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────────────────────
+   Assurestor — "electric terminal in a deep forest vault".
+   Locked design system (design.md "Design system — Assurestor (LOCKED)").
+   Greens for every surface + ONE lime signal + white text. Flat, pill buttons,
+   32px cards, hairline moss borders. Lime is rationed to the countdown ring,
+   the single primary action per viewport, and active dots.
+   Fonts (Space Grotesk + JetBrains Mono) are loaded in layout.tsx <head>.
+   ──────────────────────────────────────────────────────────────────────────*/
+@theme {
+  --color-forest-canopy: #203400; /* page background — dominant canvas */
+  --color-vault-floor: #1b2d00; /* card surfaces, recessed panels */
+  --color-canopy-mid: #335400; /* elevated / in-flight card */
+  --color-lime-phosphor: #bdff00; /* THE signal — ration it */
+  --color-moss-border: #586740; /* hairline dividers/borders */
+  --color-fern: #73a303; /* secondary accent stroke, sparingly */
+  --color-ink: #ffffff; /* body + heading text, ghost borders */
+
+  --font-display: "Space Grotesk", "Inter Tight", sans-serif;
+  --font-mono: "JetBrains Mono", "IBM Plex Mono", monospace;
+
+  --radius-cards: 32px;
+  --radius-buttons: 9999px;
+  --radius-inputs: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--color-forest-canopy);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* type scale — extreme jumps are the brand voice */
+.display {
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ghost-outline pill button (default), + one lime-filled primary per screen */
+.btn {
+  font-family: var(--font-display);
+  font-weight: 600;
+  border-radius: var(--radius-buttons);
+  padding: 14px 28px;
+  font-size: 18px;
+  cursor: pointer;
+  border: 1px solid var(--color-ink);
+  background: transparent;
+  color: var(--color-ink);
+  transition:
+    background 0.12s ease,
+    color 0.12s ease,
+    opacity 0.12s ease,
+    transform 0.08s ease;
+}
+.btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* the single primary action — lime fill, forest text */
+.btn-primary {
+  background: var(--color-lime-phosphor);
+  color: var(--color-forest-canopy);
+  border-color: var(--color-lime-phosphor);
+  font-weight: 700;
+}
+.btn-primary:hover:not(:disabled) {
+  background: #cfff3f;
+}
+
+/* subtle secondary (moss outline) */
+.btn-ghost {
+  border-color: var(--color-moss-border);
+}
+
+/* card surfaces */
+.card {
+  background: var(--color-vault-floor);
+  border: 1px solid var(--color-moss-border);
+  border-radius: var(--radius-cards);
+}
+.card-elevated {
+  background: var(--color-canopy-mid);
+  border: 1px solid var(--color-moss-border);
+  border-radius: var(--radius-cards);
+}
+
+/* keypad keys + inputs */
+.keypad-key {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 26px;
+  color: var(--color-ink);
+  background: transparent;
+  border: 1px solid var(--color-moss-border);
+  border-radius: var(--radius-inputs);
+  height: 64px;
+  cursor: pointer;
+  transition: background 0.1s ease;
+}
+.keypad-key:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.keypad-key:active {
+  background: rgba(189, 255, 0, 0.12);
+  border-color: var(--color-lime-phosphor);
+}
+
+.field {
+  background: transparent;
+  border: 1px solid var(--color-moss-border);
+  border-radius: var(--radius-inputs);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  padding: 12px 16px;
+  font-size: 18px;
+  outline: none;
+  width: 100%;
+}
+.field:focus {
+  border-color: var(--color-lime-phosphor);
+}
+
+/* explorer links / tx readouts */
+.tx-link {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-ink);
+  text-decoration: none;
+  word-break: break-all;
+}
+.tx-link:hover {
+  color: var(--color-lime-phosphor);
+}
+
+.hairline {
+  border-color: var(--color-moss-border);
+}
+
+/* active dot (lime) */
+.dot-active {
+  background: var(--color-lime-phosphor);
+}
+.dot-idle {
+  background: var(--color-moss-border);
+}
+
+@keyframes pulse-lime {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+.pulse {
+  animation: pulse-lime 1.4s ease-in-out infinite;
+}

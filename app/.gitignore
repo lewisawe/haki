@@ -1,0 +1,13 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next
+/out
+
+# misc
+*.log
+.DS_Store
+
+# NOTE: src/lib/demo-keypairs.json IS intentionally committed for the demo
+# (DevNet-only throwaway keypairs). Regenerate any time with `npm run fund`.

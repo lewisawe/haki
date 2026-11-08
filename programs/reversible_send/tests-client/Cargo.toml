@@ -1,0 +1,28 @@
+[package]
+name = "reversible_send_tests"
+version = "0.1.0"
+edition = "2021"
+description = "Correctness / FR5-invariant test harness for the reversible_send native Solana program. Drives a local solana-test-validator over RPC (no Anchor, no solana-program-test — those require a large uncached crate fetch on this machine's flaky network; solana-client + solana-sdk 1.18.26 are already in the cargo cache)."
+publish = false
+
+# A standalone crate (NOT in the program's build tree) so the on-chain program
+# keeps its minimal single-dependency graph. Only the tests pull these host crates.
+
+[dependencies]
+# All pinned to 1.18.26 — the version already present in the local cargo cache
+# (matches the program's solana-program). This lets the harness build fully
+# offline with `--offline`, avoiding the flaky multi-crate network fetch that
+# blocked Anchor / solana-program-test.
+solana-client = "=1.18.26"
+solana-sdk = "=1.18.26"
+solana-program = "=1.18.26"
+
+[dev-dependencies]
+# (none — the integration tests use only the three crates above)
+
+[lib]
+path = "src/lib.rs"
+
+[[test]]
+name = "invariants"
+path = "tests/invariants.rs"

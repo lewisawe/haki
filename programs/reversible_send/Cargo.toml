@@ -1,0 +1,20 @@
+[package]
+name = "reversible_send"
+version = "0.1.0"
+edition = "2021"
+description = "Reversible Send — self-custodial conditional payments (claim-required + auto-refund) native Solana program"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+
+[dependencies]
+# solana-program is the only runtime dependency. Pinned to the version already
+# present in the local cargo cache (see NOTES.md) to avoid a long network fetch
+# on the flaky connection. Borsh is pulled transitively by solana-program, so we
+# use solana-program's re-exported borsh rather than adding a second direct dep.
+solana-program = "=1.18.26"
+
+[profile.release]
+overflow-checks = true
+lto = "fat"
+codegen-units = 1
